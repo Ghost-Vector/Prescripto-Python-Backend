@@ -1,0 +1,398 @@
+{
+	"info": {
+		"_postman_id": "42cdf5bb-2d21-40ed-b1f9-09f663b3058f",
+		"name": "Doctor Appointment & Ticket System",
+		"description": "Postman Collection for FastAPI-based Doctor Appointment and Support Ticket system.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User (Patient) Endpoints",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/user/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"user",
+								"register"
+							]
+						}
+					}
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"john@example.com\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/user/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"user",
+								"login"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get User Profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/api/user/get-profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"user",
+								"get-profile"
+							]
+						}
+					}
+				},
+				{
+					"name": "Book Appointment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"docId\": \"1\",\n    \"slotDate\": \"20_06_2026\",\n    \"slotTime\": \"10:30 AM\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/user/book-appointment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"user",
+								"book-appointment"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get User Appointments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/api/user/appointment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"user",
+								"appointment"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Support Ticket Endpoints",
+			"item": [
+				{
+					"name": "Create Support Ticket",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"subject\": \"Booking failure on June 20th\",\n    \"description\": \"I tried to book a slot for June 20th at 10:30 AM, but it timed out and didn't confirm.\",\n    \"category\": \"booking\",\n    \"priority\": \"high\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/tickets/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"tickets",
+								"create"
+							]
+						}
+					}
+				},
+				{
+					"name": "List User Tickets",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/api/tickets/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"tickets",
+								"list"
+							]
+						}
+					}
+				},
+				{
+					"name": "Admin: List All Tickets",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "atoken",
+								"value": "{{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/api/tickets/admin/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"tickets",
+								"admin",
+								"list"
+							]
+						}
+					}
+				},
+				{
+					"name": "Admin: Assign Ticket",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "atoken",
+								"value": "{{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ticketId\": 1,\n    \"assignedTo\": \"doctor@example.com\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/tickets/admin/assign",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"tickets",
+								"admin",
+								"assign"
+							]
+						}
+					}
+				},
+				{
+					"name": "Admin: Resolve Ticket",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "atoken",
+								"value": "{{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ticketId\": 1,\n    \"response\": \"We have verified the issue and manually booked your slot. You can view it under your appointments tab.\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/tickets/admin/resolve",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"tickets",
+								"admin",
+								"resolve"
+							]
+						}
+					}
+				},
+				{
+					"name": "Admin: Tickets Reporting Dashboard",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "atoken",
+								"value": "{{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/api/tickets/admin/report",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"tickets",
+								"admin",
+								"report"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Admin Endpoints",
+			"item": [
+				{
+					"name": "Admin Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"aadmin@prescripto.com\",\n    \"password\": \"qwery1234\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/admin/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"admin",
+								"login"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Admin Dashboard",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "atoken",
+								"value": "{{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/api/admin/dashboard",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"admin",
+								"dashboard"
+							]
+						}
+					}
+				}
+			]
+		}
+	]
+}
