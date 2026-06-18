@@ -112,17 +112,9 @@ def doctor_dashboard(doctor: dict = Depends(get_current_doctor)):
         patient_ids.add(app["userId"])
         
     # Get latest 5
-    # SQL query for latest doctor appointments
-    col_doctorId = "doctorId" if db.get_db_connection()[1] else '"doctorId"'
-    latest_apps = db.execute_query(
-        f"SELECT * FROM appointments WHERE {col_doctorId} = %s ORDER BY id DESC LIMIT 5",
-        (str(doctor["id"]),),
-        fetch_all=True
-    )
+    latest_apps = db.get_latest_appointments_by_doctor(doctor["id"], 5)
     latest_serialized = []
     for app in latest_apps:
-        app["userData"] = db.from_json_field(app.get("userData", "{}"))
-        app["docData"] = db.from_json_field(app.get("docData", "{}"))
         latest_serialized.append({
             "_id": str(app["id"]),
             "id": app["id"],

@@ -164,7 +164,7 @@ def cancel_appointment(payload: AppointmentCancelRequest, admin: str = Depends(g
 def dashboard_data(admin: str = Depends(get_current_admin)):
     doc_count = len(db.get_all_doctors())
     # Quick count queries
-    user_count = db.execute_query("SELECT COUNT(*) as count FROM users", fetch_one=True).get("count", 0)
+    user_count = db.get_users_count()
     app_count = db.get_appointments_count()
     
     # Get 5 latest appointments

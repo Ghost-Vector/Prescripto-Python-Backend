@@ -218,3 +218,13 @@ def resolve_ticket(ticket_id, response):
         "response": response,
         "status": "resolved"
     }).eq("id", int(ticket_id)).execute()
+
+def get_users_count():
+    check_client()
+    res = supabase.table("users").select("id", count="exact").execute()
+    return res.count if res.count is not None else len(res.data or [])
+
+def get_latest_appointments_by_doctor(doc_id, limit=5):
+    check_client()
+    res = supabase.table("appointments").select("*").eq("doctorId", str(doc_id)).order("id", desc=True).limit(limit).execute()
+    return res.data or []
