@@ -8,7 +8,7 @@ const AppProvider = ({ children }) => {
     const [doctors, setDoctors] = useState([]);
     const [userData, setUserData] = useState(null);
     const [loading, setLoading] = useState(true);
-    const backendUrl = import.meta.env.VITE_BACKEND_URL;
+    const backendUrl = import.meta.env.VITE_BACKEND_URL ? import.meta.env.VITE_BACKEND_URL.replace(/\/$/, "") : "";
 
     // Initialize with token from localStorage
     const [token, setToken] = useState(() => {
